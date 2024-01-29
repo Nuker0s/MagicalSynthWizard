@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static UnityEngine.Rendering.DebugUI;
+
 
 public class Piano : MonoBehaviour
 {
@@ -15,11 +16,12 @@ public class Piano : MonoBehaviour
     public float keydepth;
     public float keyspeed;
     private float increment;
+    public float freqincrease;
     public float frequency = 220;
     public float gain = 0.01f;
     public float sampfreq;
     private float phase;
-    public float time;
+    public float time=1;
     private void OnAudioFilterRead(float[] data, int channels)
     {
 
@@ -30,11 +32,7 @@ public class Piano : MonoBehaviour
             phase += increment;
 
             
-            
-                data[i] = Mathf.Sin(frequency*time) * gain;
-            
-
-
+            data[i] = Mathf.Sin(frequency * time) * gain;
             if (channels == 2)
             {
                 data[i + 1] = data[i];
@@ -67,6 +65,13 @@ public class Piano : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        float tempfreq = 0;
+        foreach (int item in pressedkeys)
+        {
+            tempfreq += item * freqincrease;
+        }
+        tempfreq = tempfreq / pressedkeys.Count;
+        frequency = tempfreq;
         if (map != null)
         {
             for (int i = 0; i < map.actions.Count; i++)
