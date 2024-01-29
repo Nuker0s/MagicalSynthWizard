@@ -25,14 +25,17 @@ public class Piano : MonoBehaviour
     private void OnAudioFilterRead(float[] data, int channels)
     {
 
-        increment = frequency * 2 * Mathf.PI / sampfreq;
+        increment = (frequency+1) * 2 * Mathf.PI / sampfreq;
         for (int i = 0; i < data.Length; i += channels)
         {
 
             phase += increment;
-
-            
-            data[i] = Mathf.Sin(frequency * time) * gain;
+            float tempgain =0;
+            if (pressedkeys.Count > 0)
+            {
+                tempgain = gain;
+            }
+            data[i] = Mathf.Sign( Mathf.Sin(phase*time)) * tempgain;
             if (channels == 2)
             {
                 data[i + 1] = data[i];
@@ -53,6 +56,8 @@ public class Piano : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        
         map = pinput.actions.FindActionMap("Keyboard");
         foreach (var action in map)
         {
@@ -65,13 +70,18 @@ public class Piano : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float tempfreq = 0;
+        float tempfreq = 1;
         foreach (int item in pressedkeys)
         {
-            tempfreq += item * freqincrease;
+            tempfreq += (item + 1) * freqincrease;
         }
-        tempfreq = tempfreq / pressedkeys.Count;
+        tempfreq = (tempfreq / pressedkeys.Count) + 1;
+        if (tempfreq>10000)
+        {
+            tempfreq = 1;
+        }
         frequency = tempfreq;
+
         if (map != null)
         {
             for (int i = 0; i < map.actions.Count; i++)
