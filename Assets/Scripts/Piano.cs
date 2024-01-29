@@ -19,6 +19,7 @@ public class Piano : MonoBehaviour
     public float gain = 0.01f;
     public float sampfreq;
     private float phase;
+    public float time;
     private void OnAudioFilterRead(float[] data, int channels)
     {
 
@@ -28,10 +29,10 @@ public class Piano : MonoBehaviour
 
             phase += increment;
 
-            if (currwave != null)
-            {
-                data[i] = currwave.Process(phase, time) * gain;
-            }
+            
+            
+                data[i] = Mathf.Sin(frequency*time) * gain;
+            
 
 
             if (channels == 2)
