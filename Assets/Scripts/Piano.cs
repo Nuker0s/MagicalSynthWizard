@@ -35,7 +35,7 @@ public class Piano : MonoBehaviour
             {
                 tempgain = gain;
             }
-            data[i] = Mathf.Sign( Mathf.Sin(phase*time)) * tempgain;
+            data[i] = ( Mathf.Sin(phase*time)) * tempgain;
             if (channels == 2)
             {
                 data[i + 1] = data[i];
