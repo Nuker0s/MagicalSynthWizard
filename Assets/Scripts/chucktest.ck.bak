@@ -1,0 +1,7 @@
+TriOsc  osc1 => ADSR env1 => NRev rev1  => dac;
+0.06 => rev1.mix;
+0.5::second => dur beat;
+(beat/8,beat,0.3,1::second)=>env1.set;
+0.01 => osc1.gain;
+1 => env1.keyOn;
+beat*10=> now;

@@ -4,84 +4,90 @@ using System.Collections.ObjectModel;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+ 
 
 public class Piano : MonoBehaviour
 {
     public PlayerInput pinput;
-    private List<InputAction> actions = new List<InputAction>();
+    //private List<InputAction> actions = new List<InputAction>();
     private InputActionMap map;
+    private InputAction octavekey;
+
     public Transform keyparent;
-    public List<int> pressedkeys = new List<int>();
+    public List<long> pressedkeys = new List<long>();
     public float keydepth;
     public float keyspeed;
-    private float increment;
-    public float freqincrease;
-    public float frequency = 220;
     public float gain = 0.01f;
-    public float sampfreq;
-    private float phase;
-    public float time=1;
-    private void OnAudioFilterRead(float[] data, int channels)
-    {
-
-        increment = (frequency+1) * 2 * Mathf.PI / sampfreq;
-        for (int i = 0; i < data.Length; i += channels)
-        {
-
-            phase += increment;
-            float tempgain =0;
-            if (pressedkeys.Count > 0)
-            {
-                tempgain = gain;
-            }
-            data[i] = ( Mathf.Sin(phase*time)) * tempgain;
-            if (channels == 2)
-            {
-                data[i + 1] = data[i];
-            }
-        }
-        if (phase > 30000)
-        {
-            phase = increment;
-        }
-        /*frequency += deltatime * 20;
-        if (frequency>880)
-        {
-            frequency = 440;
-        }*/
-
-
-    }
+    public float keydebugtimer = 1;
+    public Spellcaster spellcaster;
+    List<int> octaves = new List<int> { -3,-2,-1,0,1,2,3 };
+    public ChuckSubInstance chucksub;
+    public bool switchoctave;
+   
     // Start is called before the first frame update
     void Start()
     {
-
+        foreach (var octave in octaves) 
+        {
+            Debug.Log(octave);
+        }
+        StartCoroutine(octaveswitcher());
+        octavekey = pinput.actions.FindAction("octave");
+        for (int i = 0; i < 5; i++)
+        {
+            pressedkeys.Add(0);
+        }
+        chucksub = GetComponent<ChuckSubInstance>();
+        for (int i = 0; i < 5; i++)
+        {
+            chucksub.RunFile("chucktest.ck", "" + i);
+        }
+        chucksub.SetIntArray("keys", pressedkeys.ToArray());
         
+
+
         map = pinput.actions.FindActionMap("Keyboard");
         foreach (var action in map)
         {
             action.Enable();
-            //Debug.Log(action.name + " phase: " + action.phase);
+          
         }
-        //keyboard = pinput.actions.FindAction("Keyboard");
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        float tempfreq = 1;
-        foreach (int item in pressedkeys)
+        if (octavekey.WasPressedThisFrame())
         {
-            tempfreq += (item + 1) * freqincrease;
+            switchoctave = true;
+            Debug.Log("octoswitch");
         }
-        tempfreq = (tempfreq / pressedkeys.Count) + 1;
-        if (tempfreq>10000)
-        {
-            tempfreq = 1;
-        }
-        frequency = tempfreq;
+        chucksub.SetIntArray("keys", pressedkeys.ToArray());
+        chucksub.SetFloat("gains", gain);
+        keydetector();
+        keyanim();
 
+
+    }
+    public IEnumerator octaveswitcher() 
+    {
+        
+        while (true)
+        {
+            foreach (int octave in octaves)
+            {
+                chucksub.SetInt("octave", octave);
+                Debug.Log(octave);
+                yield return new WaitUntil(() => switchoctave == true);
+                switchoctave = false;
+            }
+            yield return null;
+        }
+        
+    }
+    public void keydetector() 
+    {
         if (map != null)
         {
             for (int i = 0; i < map.actions.Count; i++)
@@ -90,40 +96,52 @@ public class Piano : MonoBehaviour
                 if (action.WasPressedThisFrame())
                 {
                     StartCoroutine(presskey(i));
+                    
+                }
+                if (action.IsPressed())
+                {
+                    keydebugtimer = 1;
                 }
                 if (action.WasReleasedThisFrame())
                 {
                     StartCoroutine(releasekey(i));
+                    
+                    
+
                 }
 
             }
 
         }
+    }
+    public void keyanim() 
+    {
         foreach (Transform key in keyparent)// Update
         {
-            if (pressedkeys.Contains(key.GetSiblingIndex()))
+            if (pressedkeys[key.GetSiblingIndex()] == 1)
             {
-                key.position = new Vector3(key.position.x,math.lerp(key.position.y, 
-                    key.parent.position.y - keydepth,keyspeed) ,key.position.z);
+                key.position = new Vector3(key.position.x, math.lerp(key.position.y,
+                    key.parent.position.y - keydepth, keyspeed), key.position.z);
             }
             else
             {
-                key.position = new Vector3(key.position.x, math.lerp(key.position.y, 
+                key.position = new Vector3(key.position.x, math.lerp(key.position.y,
                     key.parent.position.y, keyspeed), key.position.z);
             }
         }
-
     }
     public IEnumerator presskey(int key)
     {
-        pressedkeys.Add(key);    
+        pressedkeys[key] = 1;
+
+        spellcaster.keypressed(key);
+        
         yield return null;
     }
         
     public IEnumerator releasekey(int key)
-    {
-        
-        pressedkeys.Remove(key);
+    {   
+        pressedkeys[key] = 0;
         yield return null;
     }
 }

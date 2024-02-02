@@ -33,10 +33,10 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Key",
-                    "type": "PassThrough",
-                    "id": "e3e9b025-d6d5-48f3-baaf-b0c1363ec53f",
-                    "expectedControlType": "Integer",
+                    "name": "octave",
+                    "type": "Button",
+                    "id": "23b91f16-de1c-40fa-8d02-bf39eb8004e3",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -265,56 +265,12 @@
                 },
                 {
                     "name": "",
-                    "id": "cf7a41f9-a2f3-4564-8843-53207a03e417",
-                    "path": "<Keyboard>/q",
+                    "id": "4f30ca3b-ac7d-4bba-9ecb-cf399b9b9f97",
+                    "path": "<Keyboard>/tab",
                     "interactions": "",
-                    "processors": "Scale(factor=0)",
+                    "processors": "",
                     "groups": "",
-                    "action": "Key",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "f4b53352-56b6-4909-bc21-35163a8fcc3f",
-                    "path": "<Keyboard>/w",
-                    "interactions": "",
-                    "processors": "Scale",
-                    "groups": "",
-                    "action": "Key",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "b785bc75-5be2-4304-8cca-e4abeb5b101f",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "Scale(factor=2)",
-                    "groups": "",
-                    "action": "Key",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "e2c544f9-ef27-48d2-aab9-5cfd2e117aee",
-                    "path": "<Keyboard>/r",
-                    "interactions": "",
-                    "processors": "Scale(factor=3)",
-                    "groups": "",
-                    "action": "Key",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "f81c1715-8179-4c8e-a4a7-2039110fe60d",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "Scale(factor=4)",
-                    "groups": "",
-                    "action": "Key",
+                    "action": "octave",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -913,6 +869,17 @@
                     "name": "",
                     "id": "fc4e85bd-886c-45d7-9723-206a02a24555",
                     "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SPACE",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5f414018-b5cd-496e-a407-72a830e1817b",
+                    "path": "<Keyboard>/t",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
