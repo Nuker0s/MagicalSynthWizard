@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
@@ -18,10 +19,11 @@ public class NPC : MonoBehaviour
     public UnityEvent OnBadCode;
     private bool istalking = false;
     private int lastpos = 0;
+    public ChuckSubInstance chucksub;
 
     void Start()
     {
-        
+        chucksub = GetComponent<ChuckSubInstance>();
     }
     public virtual void playerhit(int note, int octave) 
     {
@@ -87,15 +89,39 @@ public class NPC : MonoBehaviour
     }
     public virtual void playnote(int note,int octave) 
     {
-
+        chucksub.RunFile("hcrab.ck", ""+note);
     }
     public virtual void wrongcode() 
     {
         Debug.Log("wrong");
+        chucksub.RunFile("badcode.ck");
+        StartCoroutine(nuhuh());
     }
+
     public virtual void goodcode() 
     {
+        chucksub.RunFile("goodcode.ck");
         Debug.Log("good");
+        StartCoroutine(uhhuh());
+    }
+    public virtual IEnumerator nuhuh()
+    {
+        anim.Rotate(0, -45, 0);
+        yield return new WaitForSeconds(0.5f);
+        anim.Rotate(0, 45, 0);
+        anim.Rotate(0, 45, 0);
+        yield return new WaitForSeconds(0.5f);
+        anim.Rotate(0, -45, 0);
+    }
+    public virtual IEnumerator uhhuh()
+    {
+        anim.Rotate(30, 0, 0);
+        yield return new WaitForSeconds(0.5f);
+        anim.Rotate(-30, 0, 0);
+        yield return new WaitForSeconds(0.5f);
+        anim.Rotate(30, 0, 0);
+        yield return new WaitForSeconds(0.5f);
+        anim.Rotate(-30, 0, 0);
     }
     // Update is called once per frame
     void Update()
