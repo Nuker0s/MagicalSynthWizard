@@ -20,30 +20,25 @@ public class Piano : MonoBehaviour
     public float gain = 0.01f;
     public float keydebugtimer = 1;
     public Spellcaster spellcaster;
-    List<int> octaves = new List<int> { -3,-2,-1,0,1,2,3 };
+    List<int> octaves = new List<int> { -2, -1, 0, 1, 2 };
     public ChuckSubInstance chucksub;
     public bool switchoctave;
-   
+    public int currentoctave = 0;
+    public float radius;
+    public float maxdist;
+    public LayerMask soundhitlayer;
+
     // Start is called before the first frame update
     void Start()
     {
+        octavekey = pinput.actions.FindAction("octave");
         foreach (var octave in octaves) 
         {
-            Debug.Log(octave);
+            //Debug.Log(octave);
         }
         StartCoroutine(octaveswitcher());
-        octavekey = pinput.actions.FindAction("octave");
-        for (int i = 0; i < 5; i++)
-        {
-            pressedkeys.Add(0);
-        }
-        chucksub = GetComponent<ChuckSubInstance>();
-        for (int i = 0; i < 5; i++)
-        {
-            chucksub.RunFile("chucktest.ck", "" + i);
-        }
-        chucksub.SetIntArray("keys", pressedkeys.ToArray());
         
+        chuckkeyboardinit();
 
 
         map = pinput.actions.FindActionMap("Keyboard");
@@ -61,14 +56,40 @@ public class Piano : MonoBehaviour
         if (octavekey.WasPressedThisFrame())
         {
             switchoctave = true;
-            Debug.Log("octoswitch");
+            //Debug.Log("octoswitch");
         }
         chucksub.SetIntArray("keys", pressedkeys.ToArray());
         chucksub.SetFloat("gains", gain);
         keydetector();
         keyanim();
+        if (keydebugtimer < 0 )
+        {
 
+        }
+        else
+        {
+            if (keydebugtimer<-1)
+            {
 
+            }
+            else keydebugtimer -= Time.deltaTime;
+        }
+
+    }
+    public void chuckkeyboardinit() 
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            pressedkeys.Add(0);
+        }
+        chucksub = GetComponent<ChuckSubInstance>();
+        
+        for (int i = 0; i < 5; i++)
+        {
+            chucksub.RunFile("chucktest.ck", "" + i);
+        }
+        chucksub.SetIntArray("keys", pressedkeys.ToArray());
+        chucksub.SetInt("octave", currentoctave);
     }
     public IEnumerator octaveswitcher() 
     {
@@ -77,8 +98,10 @@ public class Piano : MonoBehaviour
         {
             foreach (int octave in octaves)
             {
+                currentoctave = octave;
                 chucksub.SetInt("octave", octave);
                 Debug.Log(octave);
+                
                 yield return new WaitUntil(() => switchoctave == true);
                 switchoctave = false;
             }
@@ -134,6 +157,7 @@ public class Piano : MonoBehaviour
     {
         pressedkeys[key] = 1;
 
+        soundcast(key);
         spellcaster.keypressed(key);
         
         yield return null;
@@ -143,5 +167,26 @@ public class Piano : MonoBehaviour
     {   
         pressedkeys[key] = 0;
         yield return null;
+    }
+    public void soundcast(int key)
+    {
+
+        RaycastHit[] hits = Physics.SphereCastAll(transform.position, radius, transform.forward, maxdist, soundhitlayer);
+        foreach (RaycastHit item in hits)
+        {
+            NPC npc = item.collider.GetComponent<NPC>();
+            if (npc) 
+            {
+                npc.playerhit(key, 0);
+                //Debug.Log(item.collider.gameObject.name);
+            }
+            
+            
+        }
+    }
+    private void OnApplicationQuit()
+    {
+        //chucksub.RunCode(@"Machine.crash();");
+        //Debug.Log("quit");
     }
 }

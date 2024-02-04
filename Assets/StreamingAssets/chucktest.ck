@@ -1,13 +1,14 @@
 [0, 0, 0, 0, 0] @=> global int keys[];
 global float gains;
 
--2 => global int octave;
+0 => global int octave;
 [49, 54, 59, 64, 69] @=> int notes[];
 me.arg(0).toInt()=> int key;
-1::second=> dur beat;
-SinOsc osc1 => ADSR env1 => NRev rev1 => dac;
+0.5::second=> dur beat;
+SawOsc osc1 => LPF filter => ADSR env1 => NRev rev1 => dac;
 SqrOsc osc2 => ADSR env2 => NRev rev2 => dac;
-
+440 => filter.freq;
+0.2 => filter.Q;
 gains => osc1.gain;
 gains*0.1 => osc2.gain;
 
@@ -23,6 +24,7 @@ fun void press()
     12*octave => int offset;
     Math.mtof(notes[key] + offset) => osc1.freq;
     Math.mtof(notes[key] + offset) => osc2.freq;
+    //Math.mtof(notes[key] + offset) => filter.freq;
     1 => env1.keyOn;
     1 => env2.keyOn;
 }
