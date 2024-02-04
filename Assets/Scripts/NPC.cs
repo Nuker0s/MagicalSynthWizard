@@ -11,8 +11,14 @@ public class NPC : MonoBehaviour
     public float beatspace= 0.6f;
     public List<int> notes = new List<int>();
     public List<int> playernotes = new List<int>();
+    public float notetime = 1;
+    public Transform anim;
+    public List<Transform> animpoints = new List<Transform>();
     public UnityEvent OnGoodCode;
     public UnityEvent OnBadCode;
+    private bool istalking = false;
+    private int lastpos = 0;
+
     void Start()
     {
         
@@ -45,6 +51,43 @@ public class NPC : MonoBehaviour
             }
 
         }
+    }
+    private void OnMouseDown()
+    {
+        playerclick();
+    }
+    public virtual void playerclick() 
+    {
+        if (!istalking)
+        {
+            StartCoroutine(playsequence());
+        }
+    }
+    public virtual IEnumerator playsequence() 
+    {
+        
+        istalking= true;
+        foreach (int note in notes)
+        {
+            int randpos = Random.Range(1, animpoints.Count);
+            while (randpos==lastpos)
+            {
+                randpos = Random.Range(1, animpoints.Count);
+            }
+            
+            anim.position = animpoints[randpos].position;
+            anim.rotation = animpoints[randpos].rotation;
+            lastpos = randpos;
+            playnote(note, 0);
+            yield return new WaitForSeconds(notetime);
+        }
+        istalking = false;
+        anim.position = animpoints[0].position;
+        anim.rotation = animpoints[0].rotation;
+    }
+    public virtual void playnote(int note,int octave) 
+    {
+
     }
     public virtual void wrongcode() 
     {
