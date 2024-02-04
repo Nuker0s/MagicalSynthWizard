@@ -30,11 +30,13 @@ fun void relese()
     1 => env2.keyOff;
 }
 3 => key;
-beat*3 => now;
+beat => now;
 press();
 beat => now;
 relese();
+
 beat/16 => now;
+
 1 => key;
 press();
 beat => now;

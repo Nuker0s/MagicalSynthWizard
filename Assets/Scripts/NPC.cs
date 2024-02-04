@@ -1,12 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
 
 
-public class NPC : MonoBehaviour
+public class NPC : Clickable
 {
     public int octave = 0;
     public float beatspace= 0.6f;
@@ -27,7 +26,7 @@ public class NPC : MonoBehaviour
     }
     public virtual void playerhit(int note, int octave) 
     {
-        Debug.Log(note);
+       // Debug.Log(note);
         playernotes.Add(note);
         if (playernotes.Count == notes.Count) 
         {
@@ -54,15 +53,12 @@ public class NPC : MonoBehaviour
 
         }
     }
-    private void OnMouseDown()
-    {
-        playerclick();
-    }
-    public virtual void playerclick() 
+    public override void Leftclick() 
     {
         if (!istalking)
         {
             StartCoroutine(playsequence());
+            playernotes.Clear();
         }
     }
     public virtual IEnumerator playsequence() 
@@ -115,12 +111,13 @@ public class NPC : MonoBehaviour
     }
     public virtual IEnumerator uhhuh()
     {
+        float waittime = 0.3f;
         anim.Rotate(30, 0, 0);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(waittime);
         anim.Rotate(-30, 0, 0);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(waittime);
         anim.Rotate(30, 0, 0);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(waittime);
         anim.Rotate(-30, 0, 0);
     }
     // Update is called once per frame

@@ -24,27 +24,36 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Fire",
-                    "type": "Button",
-                    "id": "0604b1b2-16ae-4328-b2fe-e11bde07c432",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "octave",
-                    "type": "Button",
-                    "id": "23b91f16-de1c-40fa-8d02-bf39eb8004e3",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Camswitch",
                     "type": "Button",
-                    "id": "53281b95-00db-43ff-8eeb-aeac06927ca2",
+                    "id": "71e1a2a1-683a-4eee-805e-e8bb290c6e77",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Fire",
+                    "type": "Button",
+                    "id": "e50cd45f-ac18-4f97-874c-69d15f84912c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Leftc",
+                    "type": "Button",
+                    "id": "c702278d-d90b-46aa-aa9f-e9931ba2a9ee",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Rightc",
+                    "type": "Button",
+                    "id": "03d73ed9-327a-432f-a1e2-9c6664e9f58b",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -219,7 +228,18 @@
                 },
                 {
                     "name": "",
-                    "id": "143bb1cd-cc10-4eca-a2f0-a3664166fe91",
+                    "id": "fc34111c-ad7c-417d-9bb0-f44e6a0e50c1",
+                    "path": "<Keyboard>/capsLock",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Camswitch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8ef2c03d-d77a-4974-bcda-0d0ca7692066",
                     "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
@@ -230,7 +250,7 @@
                 },
                 {
                     "name": "",
-                    "id": "05f6913d-c316-48b2-a6bb-e225f14c7960",
+                    "id": "3dd613da-5d10-4b77-bef5-930112b4235a",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
@@ -241,7 +261,7 @@
                 },
                 {
                     "name": "",
-                    "id": "886e731e-7071-4ae4-95c0-e61739dad6fd",
+                    "id": "77a8e574-053c-4127-a91e-e5c3faa2cec2",
                     "path": "<Touchscreen>/primaryTouch/tap",
                     "interactions": "",
                     "processors": "",
@@ -252,7 +272,7 @@
                 },
                 {
                     "name": "",
-                    "id": "ee3d0cd2-254e-47a7-a8cb-bc94d9658c54",
+                    "id": "0ae8f221-076c-4718-9a00-ee0407369249",
                     "path": "<Joystick>/trigger",
                     "interactions": "",
                     "processors": "",
@@ -263,7 +283,7 @@
                 },
                 {
                     "name": "",
-                    "id": "8255d333-5683-4943-a58a-ccb207ff1dce",
+                    "id": "39bbf34a-0445-4b5b-b92a-aea107d6f622",
                     "path": "<XRController>/{PrimaryAction}",
                     "interactions": "",
                     "processors": "",
@@ -274,23 +294,23 @@
                 },
                 {
                     "name": "",
-                    "id": "4f30ca3b-ac7d-4bba-9ecb-cf399b9b9f97",
-                    "path": "<Keyboard>/tab",
+                    "id": "e774c4f0-4f0e-48f5-90e1-72324b2d7025",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "octave",
+                    "action": "Leftc",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "2000fbbc-0829-441a-9b82-be63c6ef467f",
-                    "path": "<Keyboard>/capsLock",
+                    "id": "997b59a1-1bee-414e-a588-5708d21c9013",
+                    "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Camswitch",
+                    "action": "Rightc",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -1007,6 +1027,60 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "KeyboardUtil",
+            "id": "49fd9571-80a8-44fd-a1fd-2aa27f2fa8c5",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "e1b4ba6e-3f17-443d-bb1c-37883e41efc2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "octave",
+                    "type": "Button",
+                    "id": "1ff6b15c-c465-4a14-8d40-94eb2242814a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "c4bdae5a-be28-49d4-8464-f93dfbed874f",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8111eecf-6b95-4a6c-8b77-a6d5703800c1",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "octave",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Camera",
+            "id": "52b448e3-c432-49c8-a4f6-318555de5508",
+            "actions": [],
+            "bindings": []
         }
     ],
     "controlSchemes": [
