@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEditor.Progress;
+
 public class Camscript : MonoBehaviour
 {
     public PlayerInput pinput;
@@ -11,14 +13,18 @@ public class Camscript : MonoBehaviour
     public float clickrange;
     public LayerMask leftlayers;
     public LayerMask rightlayers;
+    public LayerMask placelayers;
+    public Item pickedup;
     private InputAction rightclick;
     private InputAction leftclick;
+    private InputAction cycleitempos;
     // Start is called before the first frame update
     void Start()
     {
         rightclick = pinput.actions.FindAction("Rightc");
         leftclick = pinput.actions.FindAction("Leftc");
         camswitch = pinput.actions.FindAction("Camswitch");
+        cycleitempos = pinput.actions.FindAction("Cyclepos");
         StartCoroutine(camswitcher());
 
     }
@@ -58,16 +64,45 @@ public class Camscript : MonoBehaviour
     }
     public void Leftclick()
     {
+        bool iteminteractet=false;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, clickrange, placelayers))
+        {
+            
+
+            if (hit.collider.gameObject.tag == "ground" & pickedup != null)
+            {
+
+                pickedup.place(hit.point, hit.normal, hit.transform);
+                Debug.Log(hit.point);
+                pickedup = null;
+                iteminteractet = true;
+            }
+
+
+        }
         if (Physics.Raycast(ray, out hit, clickrange,leftlayers))
         {
             Clickable clicked = hit.collider.gameObject.GetComponent<Clickable>();
+            Item item = hit.collider.gameObject.GetComponent<Item>();
             if (clicked != null)
             {
                 clicked.Leftclick();
             }
+            if (item != null && iteminteractet ==false)
+            {
+
+                if (pickedup == null)
+                {
+                    Debug.Log(1);
+                    item.pickup();
+                    pickedup = item;
+                }
+            }
+
         }
+
     }
     public IEnumerator camswitcher() 
     {

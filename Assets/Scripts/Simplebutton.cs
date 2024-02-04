@@ -9,5 +9,21 @@ public class Simplebutton : Clickable
     public UnityEvent OnLeftClick;
     public UnityEvent OnholdLeft;
     public UnityEvent OnholdRight;
-    public override 
+
+    public override void Leftclick()
+    {
+        OnLeftClick.Invoke();
+    }
+    public override void Rightclick()
+    {
+        OnRightclick.Invoke();
+    }
+    public override void Lefthold()
+    {
+        OnholdLeft.Invoke();
+    }
+    public override void Righthold()
+    {
+        OnholdRight.Invoke();
+    }
 }

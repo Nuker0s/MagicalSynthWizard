@@ -57,5 +57,5 @@ Material:
     - _mult: 10
     - _mult2: 0.84
     m_Colors:
-    - _Color: {r: 0, g: 0.9448633, b: 1, a: 0}
+    - _Color: {r: 0.9433962, g: 0.48757526, b: 0, a: 0}
   m_BuildTextureStacks: []
