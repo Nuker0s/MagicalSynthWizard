@@ -32,6 +32,13 @@ public class Camscript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (cycleitempos.WasPressedThisFrame())
+        {
+            if (pickedup!=null)
+            {
+                pickedup.triggerchangeplace();
+            }
+        }
         if (camswitch.WasPressedThisFrame())
         {
             //Debug.Log(1);
@@ -73,11 +80,14 @@ public class Camscript : MonoBehaviour
 
             if (hit.collider.gameObject.tag == "ground" & pickedup != null)
             {
+                if (pickedup.currentpos==pickedup.positions.Count-1)
+                {
+                    pickedup.place(hit.point, hit.normal, hit.transform);
+                    Debug.Log(hit.point);
+                    pickedup = null;
+                    iteminteractet = true;
+                }
 
-                pickedup.place(hit.point, hit.normal, hit.transform);
-                Debug.Log(hit.point);
-                pickedup = null;
-                iteminteractet = true;
             }
 
 
@@ -98,6 +108,7 @@ public class Camscript : MonoBehaviour
                     Debug.Log(1);
                     item.pickup();
                     pickedup = item;
+                    item.onground = false;
                 }
             }
 

@@ -6,7 +6,7 @@ public class Clickable : MonoBehaviour
 {
     public virtual void Leftclick() 
     {
-
+        //Debug.Log("leftist2");
     }
     public virtual void Rightclick() 
     {

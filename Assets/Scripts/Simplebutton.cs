@@ -12,6 +12,7 @@ public class Simplebutton : Clickable
 
     public override void Leftclick()
     {
+        //Debug.Log("leftist");
         OnLeftClick.Invoke();
     }
     public override void Rightclick()
