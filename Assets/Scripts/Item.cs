@@ -12,6 +12,8 @@ public class Item : Clickable
     public UnityEvent OnPickUp;
     public int currentpos = 1;
     private bool changeplace = false;
+    public Rigidbody prb;
+    
     // Start is called before the first frame update
     
 
@@ -27,6 +29,7 @@ public class Item : Clickable
     }
     public virtual void pickup() 
     {
+        prb.isKinematic = true; 
         Transform cam = Camera.main.transform;
         transform.parent.position = cam.position + cam.forward * 1;
         transform.parent.rotation = Quaternion.LookRotation(-cam.forward);
@@ -42,6 +45,7 @@ public class Item : Clickable
     }
     public void place(Vector3 pos,Vector3 normal,Transform surface)
     {
+        prb.isKinematic = false;
         transform.parent.position = pos;
         transform.parent.rotation = Quaternion.LookRotation(normal);
         transform.rotation = transform.parent.rotation;
@@ -81,7 +85,15 @@ public class Item : Clickable
     }
     void Start()
     {
-        StartCoroutine(placechanger());  
+        StartCoroutine(placechanger());
+        prb = transform.parent.GetComponent<Rigidbody>();
+        MeshCollider parentmesh = prb.GetComponent<MeshCollider>();
+        if (parentmesh.sharedMesh == null) 
+        {
+            MeshCollider collid = gameObject.GetComponent<MeshCollider>();
+            parentmesh.sharedMesh = collid.sharedMesh;
+            
+        }
     }
 
     // Update is called once per frame

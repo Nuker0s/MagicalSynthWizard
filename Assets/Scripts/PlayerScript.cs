@@ -45,9 +45,7 @@ public class PlayerScript : MonoBehaviour
         if (move.IsPressed())
         {
             Vector2 dir = move.ReadValue<Vector2>();
-            Vector3 newvec = transform.forward * dir.y * forwardandrot.x;
-            newvec.y = rb.velocity.y;
-            rb.velocity = newvec;
+            
             
         }
     }

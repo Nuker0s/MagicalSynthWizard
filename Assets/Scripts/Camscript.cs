@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static UnityEditor.Progress;
+
 
 public class Camscript : MonoBehaviour
 {
@@ -83,7 +83,7 @@ public class Camscript : MonoBehaviour
                 if (pickedup.currentpos==pickedup.positions.Count-1)
                 {
                     pickedup.place(hit.point, hit.normal, hit.transform);
-                    Debug.Log(hit.point);
+                    //Debug.Log(hit.point);
                     pickedup = null;
                     iteminteractet = true;
                 }

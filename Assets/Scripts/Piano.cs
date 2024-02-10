@@ -1,13 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
- 
+using UnityEngine.Timeline;
 
-public class Piano : MonoBehaviour
+public class Piano : Clickable
 {
+    public Transform pianoffset;
     public PlayerInput pinput;
     //private List<InputAction> actions = new List<InputAction>();
     private InputActionMap map;
@@ -27,6 +29,8 @@ public class Piano : MonoBehaviour
     public float radius;
     public float maxdist;
     public LayerMask soundhitlayer;
+    public bool equipped;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -49,7 +53,7 @@ public class Piano : MonoBehaviour
         }
 
     }
-
+    
     // Update is called once per frame
     void Update()
     {
@@ -111,7 +115,7 @@ public class Piano : MonoBehaviour
     }
     public void keydetector() 
     {
-        if (map != null)
+        if (map != null & transform.parent != null)
         {
             for (int i = 0; i < map.actions.Count; i++)
             {
@@ -182,6 +186,18 @@ public class Piano : MonoBehaviour
             }
             
             
+        }
+    }
+    public override void Leftclick()
+    {
+        if (transform.parent != pianoffset)
+        {
+            transform.parent = pianoffset;
+            transform.position = pianoffset.position;
+            transform.rotation = pianoffset.rotation;
+            transform.localScale = Vector3.one;
+            RenderSettings.fog = false;
+            equipped = true;
         }
     }
     private void OnApplicationQuit()
