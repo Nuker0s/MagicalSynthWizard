@@ -8,6 +8,7 @@ public class PlayerScript : MonoBehaviour
     public Rigidbody rb;
     public Transform currentcheckpoint;
     public float hp=100;
+    public float moveforce=1000f;
     public float maxhp=100;
     public Vector2 forwardandrot;
     private InputAction move;
@@ -45,6 +46,7 @@ public class PlayerScript : MonoBehaviour
         if (move.IsPressed())
         {
             Vector2 dir = move.ReadValue<Vector2>();
+            rb.AddForce(dir * transform.forward * moveforce);
             
             
         }
