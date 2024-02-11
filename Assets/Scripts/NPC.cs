@@ -9,7 +9,7 @@ public class NPC : Clickable
 {
     public int octave = 0;
     public float beatspace= 0.6f;
-    public List<int> notes = new List<int>();
+    //public List<int> notes = new List<int>();
     public List<int> playernotes = new List<int>();
     public float notetime = 1;
     public Transform anim;
@@ -19,7 +19,17 @@ public class NPC : Clickable
     private bool istalking = false;
     private int lastpos = 0;
     public ChuckSubInstance chucksub;
+    public int level = 0;
+    [SerializeField]
+    public List<Codecont> codes = new List<Codecont>();
 
+
+    [System.Serializable] // Optional, but can be useful for nested classes
+    public class Codecont
+    {
+        [SerializeField]
+        public List<int> notes;
+    }
     void Start()
     {
         chucksub = GetComponent<ChuckSubInstance>();
@@ -28,12 +38,12 @@ public class NPC : Clickable
     {
        // Debug.Log(note);
         playernotes.Add(note);
-        if (playernotes.Count == notes.Count) 
+        if (playernotes.Count == codes[level].notes.Count) 
         {
             bool good = true;
-            for (int i = 0; i < notes.Count; i++)
+            for (int i = 0; i < codes[level].notes.Count; i++)
             {
-                if (playernotes[i] == notes[i])
+                if (playernotes[i] == codes[level].notes[i])
                 {
 
                 }
@@ -65,7 +75,7 @@ public class NPC : Clickable
     {
         
         istalking= true;
-        foreach (int note in notes)
+        foreach (int note in codes[level].notes)
         {
             int randpos = Random.Range(1, animpoints.Count);
             while (randpos==lastpos)
@@ -92,13 +102,20 @@ public class NPC : Clickable
         Debug.Log("wrong");
         chucksub.RunFile("badcode.ck");
         StartCoroutine(nuhuh());
+        OnGoodCode.Invoke();
     }
 
     public virtual void goodcode() 
     {
+        level++;
+        if (level >= codes.Count)
+        {
+            level = codes.Count;
+        }
         chucksub.RunFile("goodcode.ck");
         Debug.Log("good");
         StartCoroutine(uhhuh());
+        OnGoodCode.Invoke();
     }
     public virtual IEnumerator nuhuh()
     {

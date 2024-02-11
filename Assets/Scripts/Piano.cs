@@ -22,7 +22,7 @@ public class Piano : Clickable
     public float gain = 0.01f;
     public float keydebugtimer = 1;
     public Spellcaster spellcaster;
-    List<int> octaves = new List<int> { -2, -1, 0, 1, 2 };
+    public List<int> octaves = new List<int> { -2, -1, 0, 1, 2 };
     public ChuckSubInstance chucksub;
     public bool switchoctave;
     public int currentoctave = 0;

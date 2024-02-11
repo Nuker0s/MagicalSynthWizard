@@ -9,13 +9,16 @@ public class PlayerScript : MonoBehaviour
     public Transform currentcheckpoint;
     public float hp=100;
     public float moveforce=1000f;
+    public float maxspeed = 8;
     public float maxhp=100;
+   
     public Vector2 forwardandrot;
     private InputAction move;
     private InputAction keyboard;
     // Start is called before the first frame update
     void Start()
     {
+        Application.targetFrameRate = 60;
         move = pinput.actions.FindAction("Move");
         keyboard = pinput.actions.FindAction("Keyboard");
     }
@@ -46,8 +49,11 @@ public class PlayerScript : MonoBehaviour
         if (move.IsPressed())
         {
             Vector2 dir = move.ReadValue<Vector2>();
-            rb.AddForce(dir * transform.forward * moveforce);
-            
+            rb.AddForce(dir.y*transform.forward * moveforce);
+            if (rb.velocity.magnitude>maxspeed)
+            {
+                rb.velocity = rb.velocity.normalized * maxspeed;
+            }
             
         }
     }

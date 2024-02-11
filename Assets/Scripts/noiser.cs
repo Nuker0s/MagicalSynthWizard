@@ -9,6 +9,7 @@ public class noiser : MonoBehaviour
     public float radius = 1f;
     public bool generate = false;
     public float updatetime = 0.5f;
+    public PlayerScript player;
     // Start is called before the first frame update
     void Start()
     {
