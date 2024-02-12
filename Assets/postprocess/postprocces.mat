@@ -20,7 +20,7 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
-  m_LockedProperties: is_on
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -45,7 +45,7 @@ Material:
     - _Float: 384
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _ncolors: 512
+    - _ncolors: 128
     - _saturation: 1
     - is_on: 1
     m_Colors:

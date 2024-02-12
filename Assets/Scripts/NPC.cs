@@ -20,6 +20,7 @@ public class NPC : Clickable
     private int lastpos = 0;
     public ChuckSubInstance chucksub;
     public int level = 0;
+    public string chuckfile;
     [SerializeField]
     public List<Codecont> codes = new List<Codecont>();
 
@@ -95,7 +96,7 @@ public class NPC : Clickable
     }
     public virtual void playnote(int note,int octave) 
     {
-        chucksub.RunFile("hcrab.ck", ""+note);
+        chucksub.RunFile(chuckfile, ""+note);
     }
     public virtual void wrongcode() 
     {
@@ -110,12 +111,13 @@ public class NPC : Clickable
         level++;
         if (level >= codes.Count)
         {
-            level = codes.Count;
+            level = codes.Count - 1;
+            OnGoodCode.Invoke();
         }
         chucksub.RunFile("goodcode.ck");
         Debug.Log("good");
         StartCoroutine(uhhuh());
-        OnGoodCode.Invoke();
+        
     }
     public virtual IEnumerator nuhuh()
     {

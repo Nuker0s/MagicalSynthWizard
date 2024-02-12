@@ -9,6 +9,8 @@ public class Mainmenu : MonoBehaviour
     public Piano piano;
     [SerializeField]
     public List<Ncontainer> notes = new List<Ncontainer>();
+    public float beattime = 0.5f;
+    public Transform teleporttolevel; 
 
     [System.Serializable] // Optional, but can be useful for nested classes
     public class Ncontainer
@@ -54,12 +56,13 @@ public class Mainmenu : MonoBehaviour
                 }
                 Debug.Log(note.keydurrspace.x);
                 StartCoroutine(piano.presskey((int)note.keydurrspace.x));
-                yield return new WaitForSeconds(note.keydurrspace.y);
+                yield return new WaitForSeconds(note.keydurrspace.y * beattime);
                 StartCoroutine(piano.releasekey((int)note.keydurrspace.x));
-                yield return new WaitForSeconds (note.keydurrspace.z);
+                yield return new WaitForSeconds (note.keydurrspace.z * beattime);
             }
             if (piano.equipped)
             {
+                piano.transform.parent.parent.position = teleporttolevel.transform.position;
                 break;
             }
         }

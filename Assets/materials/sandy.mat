@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: sandy
-  m_Shader: {fileID: -6465566751694194690, guid: 65e3c6a8356d73c44bb369d639b7a993,
+  m_Shader: {fileID: -6465566751694194690, guid: e7e86a97f5b0324468222e4ace889b07,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -126,11 +126,11 @@ Material:
     - _Surface: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
-    - _colors: 3.37
+    - _colors: 88.2
     - _flowerdens: 21.82
     - _flowerscale: 0
     - _flowersize: 12.4
-    - _noisescale: 10
+    - _noisescale: 271.2
     - _size: 70.86
     - _size567: 204.46
     m_Colors:

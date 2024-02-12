@@ -322,7 +322,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 226210177}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: e2188ab33a2ecb144bb8659735e2b1cb, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1024,6 +1024,7 @@ MonoBehaviour:
       m_Calls: []
   chucksub: {fileID: 0}
   level: 0
+  chuckfile: 
   codes: []
 --- !u!114 &960840126
 MonoBehaviour:
@@ -1496,6 +1497,66 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8680475148440918335, guid: 80ce8a1f6461d9d42a9554ee2312bf6b,
+        type: 3}
+      propertyPath: chuckfile
+      value: hcrab.ck
+      objectReference: {fileID: 0}
+    - target: {fileID: 8680475148440918335, guid: 80ce8a1f6461d9d42a9554ee2312bf6b,
+        type: 3}
+      propertyPath: codes.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8680475148440918335, guid: 80ce8a1f6461d9d42a9554ee2312bf6b,
+        type: 3}
+      propertyPath: codes.Array.data[0].notes.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8680475148440918335, guid: 80ce8a1f6461d9d42a9554ee2312bf6b,
+        type: 3}
+      propertyPath: codes.Array.data[1].notes.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8680475148440918335, guid: 80ce8a1f6461d9d42a9554ee2312bf6b,
+        type: 3}
+      propertyPath: codes.Array.data[0].notes.Array.data[1]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8680475148440918335, guid: 80ce8a1f6461d9d42a9554ee2312bf6b,
+        type: 3}
+      propertyPath: codes.Array.data[0].notes.Array.data[2]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8680475148440918335, guid: 80ce8a1f6461d9d42a9554ee2312bf6b,
+        type: 3}
+      propertyPath: codes.Array.data[0].notes.Array.data[3]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8680475148440918335, guid: 80ce8a1f6461d9d42a9554ee2312bf6b,
+        type: 3}
+      propertyPath: codes.Array.data[0].notes.Array.data[4]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8680475148440918335, guid: 80ce8a1f6461d9d42a9554ee2312bf6b,
+        type: 3}
+      propertyPath: codes.Array.data[1].notes.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8680475148440918335, guid: 80ce8a1f6461d9d42a9554ee2312bf6b,
+        type: 3}
+      propertyPath: codes.Array.data[1].notes.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8680475148440918335, guid: 80ce8a1f6461d9d42a9554ee2312bf6b,
+        type: 3}
+      propertyPath: codes.Array.data[1].notes.Array.data[2]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8680475148440918335, guid: 80ce8a1f6461d9d42a9554ee2312bf6b,
+        type: 3}
+      propertyPath: codes.Array.data[1].notes.Array.data[3]
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 9128169965669749467, guid: 80ce8a1f6461d9d42a9554ee2312bf6b,
         type: 3}
       propertyPath: chuckMainInstance
@@ -1527,6 +1588,12 @@ PrefabInstance:
       propertyPath: chuckMainInstance
       value: 
       objectReference: {fileID: 1791994507}
+    - target: {fileID: 2034348844838393211, guid: 84a0bc2994fa64741b7a614b07bc5d8e,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: eb352930e7bab934e82a36b37c1e36e2,
+        type: 2}
     - target: {fileID: 5475793400563999877, guid: 84a0bc2994fa64741b7a614b07bc5d8e,
         type: 3}
       propertyPath: m_Name
